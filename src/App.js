@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import {useState} from 'react'
 function App() {
+  const[toDo,setToDo]=useState('')
+  const[toDoList,setToDoList]=useState(['Buy milk','Goto a movie','walk the dog'])
+
+  function handelTpDoChange(e){
+    setToDo(e.target.value)
+  }
+
+  function AddItem(){
+    setToDoList(toDoList.push(toDo))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input value={toDo} onChange={handelTpDoChange}/>
+      <button onClick={AddItem}>Add to list</button>
+      <h3> List of thinks to do</h3>
+      <ul> {toDoList.map(
+        toDo => (
+          <li>{toDo}</li>
+        )
+      )}
+
+
+      </ul>
+
     </div>
   );
 }
